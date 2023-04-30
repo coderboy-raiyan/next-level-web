@@ -1,0 +1,14 @@
+{
+  "name": "explore_typescript",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.0.4"
+  }
+}
