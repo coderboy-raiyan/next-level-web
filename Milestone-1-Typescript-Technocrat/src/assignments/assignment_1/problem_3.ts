@@ -1,11 +1,11 @@
-// function reverseArray<T extends string[]>(...array: T) {
-//   return array.reverse();
-// }
+function reverseArray<T extends string[]>(...array: T) {
+  return array.reverse();
+}
 
-// const numberOfStrings = [
-//   "aemond tragareyn",
-//   "aegon tragareyn",
-//   "deamon targareyn",
-// ];
+const numberOfStrings = [
+  "aemond tragareyn",
+  "aegon tragareyn",
+  "deamon targareyn",
+];
 
-// reverseArray(...numberOfStrings);
+reverseArray(...numberOfStrings);
