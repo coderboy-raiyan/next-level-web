@@ -9,3 +9,15 @@ export const createUserToDB = async (payload: IUser): Promise<IUser> => {
   const users = await new User(payload).save();
   return users;
 };
+export const getUserIdFromDB = async (
+  payload: string
+): Promise<IUser | null> => {
+  const user = await User.findById(payload);
+  return user;
+};
+export const getAdminUserFromDB = async (
+  payload: string
+): Promise<IUser | null> => {
+  const user = await User.findById(payload);
+  return user;
+};
