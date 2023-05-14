@@ -2,11 +2,6 @@ import { Schema, model } from "mongoose";
 import { IUser } from "./user.interface";
 
 const userSchema = new Schema<IUser>({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   role: {
     type: String,
     required: true,
@@ -31,6 +26,7 @@ const userSchema = new Schema<IUser>({
   },
   dateOfBirth: {
     type: String,
+    default: "",
   },
   gender: {
     type: String,
@@ -38,6 +34,7 @@ const userSchema = new Schema<IUser>({
   },
   email: {
     type: String,
+    required: true,
   },
   contactNo: {
     type: String,
