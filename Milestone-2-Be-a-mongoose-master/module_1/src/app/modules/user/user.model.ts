@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import { IUser } from "./user.interface";
+import { IUser, UserModel } from "./user.interface";
 
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema<IUser, UserModel>({
   role: {
     type: String,
     required: true,
@@ -54,7 +54,11 @@ const userSchema = new Schema<IUser>({
   },
 });
 
-const User = model<IUser>("User", userSchema);
+userSchema.static("getAdminUsers", async function () {
+  const users = await this.find({ role: "admin" });
+  return users;
+});
+const User = model<IUser, UserModel>("User", userSchema);
 
 export default User;
 
