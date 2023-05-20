@@ -11,3 +11,31 @@ db.practice_data.aggregate([
   { $addFields: { slaray: 0 } },
   { $merge: "practice_data" },
 ]);
+
+// 3.
+// Group stage with rename using projection
+db.practice_data.aggregate([
+  {
+    $group: {
+      _id: { gender: "$gender", company: "$company", ipAddress: "$ipAddress" },
+    },
+  },
+  { $project: { _id: 0, salary: "$_id" } },
+]);
+
+// 4.
+// stages using accumulator operators
+db.practice_data.aggregate([
+  { $match: { age: { $gt: 18 } } },
+  {
+    $group: {
+      _id: {
+        gender: "$gender",
+        company: "$company",
+        ipAddress: "$ipAddress",
+        age: { $toInt: { $avg: "$age" } },
+      },
+    },
+  },
+  { $project: { _id: 0, salary: "$_id" } },
+]);
