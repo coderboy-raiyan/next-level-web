@@ -39,3 +39,19 @@ db.practice_data.aggregate([
   },
   { $project: { _id: 0, salary: "$_id" } },
 ]);
+
+// 5.
+// unwind stage for nested array grouping
+db.practice_data.aggregate([
+  { $unwind: "$education" },
+  { $group: { _id: "$education", count: { $sum: 1 } } },
+]);
+
+// 6.
+// Multi Stage pipeline using facet
+db.practice_data.aggregate([
+  { $match: { _id: ObjectId("6406ad65fc13ae5a400000c7") } },
+  {
+    $facet: { followers: [{ $project: { followers: { $size: "$friends" } } }] },
+  },
+]);
