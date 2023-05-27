@@ -38,3 +38,43 @@ db.users.aggregate([
   { $group: { _id: null, avgAge: { $avg: "$age" } } },
   { $project: { avgAge: { $toInt: "$avgAge" } } },
 ]);
+
+// Problem - 9
+db.customers.aggregate([
+  {
+    $lookup: {
+      from: "orders",
+      localField: "_id",
+      foreignField: "customer_id",
+      as: "oderDetails",
+    },
+  },
+]);
+
+// *** Tasks on Aggregation ***
+
+// Problem - 1
+db.users.aggregate([
+  { $group: { _id: "$favorites.color", count: { $sum: 1 } } },
+]);
+
+// Problem - 2
+db.users.aggregate([{ $group: { _id: "$email", age: { $max: "$age" } } }]);
+
+// Problem - 3
+db.users.aggregate([
+  { $unwind: "$friends" },
+  { $group: { _id: "$friends" } },
+  { $count: "total" },
+]);
+
+// Problem - 3
+db.users.aggregate([{ $project: { name: 1, length: { $strLenCP: "$name" } } }]);
+
+// Problem - 4
+db.users.aggregate([{ $group: { _id: "$address.state", count: { $sum: 1 } } }]);
+
+// Problem - 5
+db.users.aggregate([
+  { $project: { followers: { $max: { $size: "$friends" } } } },
+]);
