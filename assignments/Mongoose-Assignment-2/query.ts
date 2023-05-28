@@ -1,3 +1,8 @@
+/*
+ *** Tasks ***
+ */
+
+// Task - 1
 import mongoose from "mongoose";
 
 export interface IBookModel {
@@ -68,3 +73,23 @@ const BookSchema = new mongoose.Schema<IBookModel>({
 const BooksModel = mongoose.model<IBookModel>("Book", BookSchema);
 
 export default BooksModel;
+
+// Task - 2
+db.books.find({ genre: "Fantasy" });
+
+// Task - 3
+db.books.find({ genre: "Sci-Fi", "publisher.name": "Roli Books" });
+
+// Task - 4
+db.books.aggregate([
+  {
+    $facet: {
+      featured: [{ $match: { rating: { $gte: 4 } } }],
+      popular: [{ $match: { rating: { $gte: 4 } } }],
+      BestSeller: [{ $match: { rating: { $gt: 4.5 } } }],
+    },
+  },
+]);
+
+// Task - 5
+db.books.updateMany({}, [{ $set: { price: { $toInt: "$price" } } }]);
